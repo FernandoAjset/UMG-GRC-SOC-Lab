@@ -1,0 +1,28 @@
+# Claude Code internals
+.claude/
+
+# Playwright MCP snapshots
+.playwright-mcp/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Archivos generados en runtime (recreables con docker compose up)
+siem_data/alertas_siem.json
+siem_data/dashboard_metricas.json
+siem_data/simulacion_estado.json
+lab_ransom/*.locked
+logs/reporte_ir_*.txt
+logs/forense_ir_*.log
+logs/consolidated_*.log
+logs/notificacion_ciso.txt
+
+# Exports temporales
+alertas_exportadas.json
+auth_log_copia.log

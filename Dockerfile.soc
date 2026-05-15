@@ -1,0 +1,71 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar herramientas del laboratorio SOC
+RUN apt-get update && apt-get install -y \
+    openssh-server \
+    net-tools \
+    python3 \
+    python3-pip \
+    curl \
+    wget \
+    vim \
+    nano \
+    iputils-ping \
+    iproute2 \
+    tcpdump \
+    sudo \
+    cron \
+    rsyslog \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configurar SSH
+RUN mkdir /var/run/sshd
+RUN echo 'root:GRC2026!' | chpasswd
+RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
+
+# Crear usuario estudiante
+RUN useradd -m -s /bin/bash student
+RUN echo 'student:Student2026!' | chpasswd
+RUN usermod -aG sudo student
+
+# Crear estructura de laboratorio
+RUN mkdir -p /logs /lab_ransom /soc/scripts /siem_data
+
+# Copiar scripts de laboratorio
+COPY scripts/ /soc/scripts/
+RUN chmod +x /soc/scripts/*.py 2>/dev/null || true
+
+# Generar logs iniciales de autenticación simulados
+RUN echo "2026-05-01 10:01:05 FAILED login user=admin ip=185.21.44.10" >> /logs/auth.log && \
+    echo "2026-05-01 10:01:22 FAILED login user=root ip=185.21.44.11" >> /logs/auth.log && \
+    echo "2026-05-01 10:01:38 FAILED login user=admin ip=185.21.44.12" >> /logs/auth.log && \
+    echo "2026-05-01 10:01:55 FAILED login user=guest ip=185.21.44.13" >> /logs/auth.log && \
+    echo "2026-05-01 10:02:10 SUCCESS login user=admin ip=185.21.44.10" >> /logs/auth.log && \
+    echo "2026-05-01 10:03:05 FILE_ACCESS /etc/passwd user=admin ip=185.21.44.10" >> /logs/auth.log && \
+    echo "2026-05-01 10:04:30 DATA_EXPORT database=clients size=2GB user=admin" >> /logs/auth.log
+
+# Generar logs SOC avanzados
+RUN echo "2026-05-01 10:01 LOGIN_FAIL user=admin ip=185.21.44.10" >> /siem_data/soc_logs.txt && \
+    echo "2026-05-01 10:02 LOGIN_FAIL user=root ip=185.21.44.11" >> /siem_data/soc_logs.txt && \
+    echo "2026-05-01 10:03 LOGIN_FAIL user=admin ip=185.21.44.12" >> /siem_data/soc_logs.txt && \
+    echo "2026-05-01 10:04 LOGIN_SUCCESS user=admin ip=185.21.44.10" >> /siem_data/soc_logs.txt && \
+    echo "2026-05-01 10:05 FILE_ACCESS /etc/passwd user=admin" >> /siem_data/soc_logs.txt && \
+    echo "2026-05-01 10:06 DATA_EXPORT database=clients size=2GB" >> /siem_data/soc_logs.txt && \
+    echo "2026-05-01 10:07 LOGIN_FAIL user=dbadmin ip=10.0.0.55" >> /siem_data/soc_logs.txt && \
+    echo "2026-05-01 10:08 PORT_SCAN src=92.168.1.200 ports=22,80,443,3306" >> /siem_data/soc_logs.txt && \
+    echo "2026-05-01 10:09 MULTIPLE_ACCESS user=admin sessions=8" >> /siem_data/soc_logs.txt
+
+# Crear archivos para simulación ransomware
+RUN echo "Contrato confidencial cliente 001" > /lab_ransom/contrato_001.txt && \
+    echo "Reporte financiero Q1 2026" > /lab_ransom/reporte_financiero.txt && \
+    echo "Lista de empleados nomina" > /lab_ransom/nomina_empleados.txt && \
+    echo "Datos personales clientes VIP" > /lab_ransom/clientes_vip.txt && \
+    echo "Credenciales base de datos produccion" > /lab_ransom/credenciales_prod.txt
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]

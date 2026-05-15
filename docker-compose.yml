@@ -1,0 +1,87 @@
+# ============================================================
+# GRC LABORATORIO SOC SIMULADO — UMG Semana 5
+# Catedrático: MS.c. Erick Enrique Blanco Acevedo
+# ============================================================
+
+services:
+
+  # ──────────────────────────────────────────────
+  # CONTENEDOR 1: SOC Lab Principal (Ubuntu 22.04)
+  # SSH: localhost:2222 | root / GRC2026!
+  # ──────────────────────────────────────────────
+  grc-soc-lab:
+    build:
+      context: .
+      dockerfile: Dockerfile.soc
+    container_name: grc-soc-lab
+    hostname: soc-server
+    ports:
+      - "2222:22"
+    volumes:
+      - ./scripts:/soc/scripts
+      - ./logs:/logs
+      - ./lab_ransom:/lab_ransom
+      - ./siem_data:/siem_data
+    environment:
+      - LAB_NAME=GRC_SOC_LAB
+      - TEAM=TechGuard_Guatemala
+    networks:
+      grc-net:
+        ipv4_address: 192.168.99.10
+    restart: unless-stopped
+
+  # ──────────────────────────────────────────────
+  # CONTENEDOR 2: Atacante Simulado (Alpine)
+  # SSH: localhost:2223 | root / Attacker2026!
+  # ──────────────────────────────────────────────
+  grc-attacker:
+    image: alpine:3.18
+    container_name: grc-attacker
+    hostname: attacker-node
+    command: >
+      sh -c "apk add --no-cache openssh bash python3 &&
+             echo 'root:Attacker2026!' | chpasswd &&
+             ssh-keygen -A &&
+             echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config &&
+             echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config &&
+             /usr/sbin/sshd -D"
+    ports:
+      - "2223:22"
+    networks:
+      grc-net:
+        ipv4_address: 192.168.99.20
+    restart: unless-stopped
+
+  # ──────────────────────────────────────────────
+  # CONTENEDOR 3: SIEM / Log Collector (Python)
+  # Dashboard: http://localhost:8080
+  # ──────────────────────────────────────────────
+  grc-siem:
+    image: python:3.11-slim
+    container_name: grc-siem
+    hostname: siem-server
+    working_dir: /app
+    volumes:
+      - ./scripts:/app/scripts
+      - ./siem_data:/app/siem_data
+      - ./logs:/app/logs
+    ports:
+      - "8080:8080"
+    command: python3 /app/scripts/siem_dashboard_web.py
+    networks:
+      grc-net:
+        ipv4_address: 192.168.99.30
+    restart: unless-stopped
+    depends_on:
+      - grc-soc-lab
+
+networks:
+  grc-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.99.0/24
+
+volumes:
+  grc-logs:
+  grc-data:

@@ -1,0 +1,17 @@
+2026-05-01 10:01 LOGIN_FAIL user=admin ip=185.21.44.10
+2026-05-01 10:02 LOGIN_FAIL user=root ip=185.21.44.11
+2026-05-01 10:03 LOGIN_FAIL user=admin ip=185.21.44.12
+2026-05-01 10:04 LOGIN_SUCCESS user=admin ip=185.21.44.10
+2026-05-01 10:05 FILE_ACCESS /etc/passwd user=admin
+2026-05-01 10:06 DATA_EXPORT database=clients size=2GB
+2026-05-01 10:07 LOGIN_FAIL user=dbadmin ip=10.0.0.55
+2026-05-01 10:08 PORT_SCAN src=92.168.1.200 ports=22,80,443,3306
+2026-05-01 10:09 MULTIPLE_ACCESS user=admin sessions=8
+2026-05-14 18:45:53 SIMULATION_RUN run=1 scenario="Periodo crítico: exfiltración contenida parcialmente" risk=22 mttr=18
+2026-05-15 00:46:31 SIMULATION_RUN run=2 scenario="Periodo estable: controles preventivos mejoran" risk=16 mttr=11
+2026-05-15 00:47:04 SIMULATION_RUN run=3 scenario="Periodo ransomware: recuperación probada" risk=19 mttr=21
+2026-05-15 00:47:57 SIMULATION_RUN run=4 scenario="Periodo crítico: exfiltración contenida parcialmente" risk=22 mttr=18
+2026-05-15 00:48:00 SIMULATION_RUN run=5 scenario="Periodo estable: controles preventivos mejoran" risk=16 mttr=11
+2026-05-15 00:48:04 SIMULATION_RUN run=6 scenario="Periodo ransomware: recuperación probada" risk=19 mttr=21
+2026-05-15 00:48:07 SIMULATION_RUN run=7 scenario="Periodo crítico: exfiltración contenida parcialmente" risk=22 mttr=18
+2026-05-15 00:48:12 SIMULATION_RUN run=8 scenario="Periodo estable: controles preventivos mejoran" risk=16 mttr=11

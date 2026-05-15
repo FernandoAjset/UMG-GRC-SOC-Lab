@@ -1,0 +1,7 @@
+2026-05-01 10:01:05 FAILED login user=admin ip=185.21.44.10
+2026-05-01 10:01:22 FAILED login user=root ip=185.21.44.11
+2026-05-01 10:01:38 FAILED login user=admin ip=185.21.44.12
+2026-05-01 10:01:55 FAILED login user=guest ip=185.21.44.13
+2026-05-01 10:02:10 SUCCESS login user=admin ip=185.21.44.10
+2026-05-01 10:03:05 FILE_ACCESS /etc/passwd user=admin ip=185.21.44.10
+2026-05-01 10:04:30 DATA_EXPORT database=clients size=2GB user=admin
