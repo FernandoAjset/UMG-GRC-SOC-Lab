@@ -14,21 +14,7 @@ __pycache__/
 *.pyo
 
 # Archivos generados en runtime (recreables con docker compose up)
-siem_data/alertas_siem.json
-siem_data/dashboard_metricas.json
-siem_data/simulacion_estado.json
 lab_ransom/*.locked
-logs/reporte_ir_*.txt
-logs/forense_ir_*.log
-logs/consolidated_*.log
-logs/notificacion_ciso.txt
-!logs/reporte_ir_0501.txt
-!logs/forense_ir_0502_20260515_1847.log
-!logs/consolidated_20260515.log
-!logs/notificacion_ciso.txt
-!siem_data/alertas_siem.json
-!siem_data/dashboard_metricas.json
-!siem_data/simulacion_estado.json
 
 # Exports temporales
 alertas_exportadas.json
