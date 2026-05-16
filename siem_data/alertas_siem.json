@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-05-15T18:47:02.614832",
+  "organizacion": "TechGuard Guatemala S.A.",
+  "total_eventos": 9,
+  "alertas": [
+    {
+      "rule_id": "GRC-1001",
+      "descripcion": "Ataque de Fuerza Bruta Detectado",
+      "nivel": "CRÍTICO",
+      "eventos": 4,
+      "mitre": "T1110 - Brute Force",
+      "nist": "DE.CM-1",
+      "iso": "A.9.4.2"
+    },
+    {
+      "rule_id": "GRC-1002",
+      "descripcion": "Acceso a Archivos Críticos del Sistema",
+      "nivel": "ALTO",
+      "eventos": 1,
+      "mitre": "T1083 - File Discovery",
+      "nist": "DE.CM-7",
+      "iso": "A.12.4.1"
+    },
+    {
+      "rule_id": "GRC-1003",
+      "descripcion": "Posible Exfiltración de Datos",
+      "nivel": "CRÍTICO",
+      "eventos": 1,
+      "mitre": "T1048 - Exfiltration Over Alternative Protocol",
+      "nist": "PR.DS-5",
+      "iso": "A.12.4.1"
+    },
+    {
+      "rule_id": "GRC-1004",
+      "descripcion": "Escaneo de Puertos — Reconocimiento",
+      "nivel": "MEDIO",
+      "eventos": 1,
+      "mitre": "T1046 - Network Service Discovery",
+      "nist": "DE.CM-1",
+      "iso": "A.13.1.1"
+    },
+    {
+      "rule_id": "GRC-1099",
+      "descripcion": "⚠️ KILL CHAIN DETECTADO: Fuerza Bruta → Acceso → Exfiltración",
+      "nivel": "CRÍTICO",
+      "eventos": 5,
+      "mitre": "Múltiples TTPs (Initial Access → Exfiltration)",
+      "nist": "RS.RP-1",
+      "iso": "A.16.1.5"
+    }
+  ]
+}

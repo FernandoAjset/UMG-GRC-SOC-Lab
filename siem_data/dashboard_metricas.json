@@ -1,0 +1,119 @@
+{
+  "timestamp": "2026-05-15T18:47:02.614008",
+  "organizacion": "TechGuard Guatemala S.A.",
+  "periodo": "Mayo 2026",
+  "kpis": {
+    "MTTR (Mean Time To Respond)": {
+      "valor": 14,
+      "unidad": "min",
+      "meta": 15,
+      "estado": "OK"
+    },
+    "MTTD (Mean Time To Detect)": {
+      "valor": 3,
+      "unidad": "min",
+      "meta": 5,
+      "estado": "OK"
+    },
+    "Incidentes resueltos en SLA": {
+      "valor": 92,
+      "unidad": "%",
+      "meta": 90,
+      "estado": "OK"
+    },
+    "Disponibilidad del SOC": {
+      "valor": 99.8,
+      "unidad": "%",
+      "meta": 99.5,
+      "estado": "OK"
+    },
+    "Tiempo promedio análisis forense": {
+      "valor": 2.5,
+      "unidad": "horas",
+      "meta": 3,
+      "estado": "OK"
+    }
+  },
+  "kris": {
+    "% Detección de incidentes": {
+      "valor": 85,
+      "unidad": "%",
+      "meta": 80,
+      "estado": "OK"
+    },
+    "% Logs analizados": {
+      "valor": 92,
+      "unidad": "%",
+      "meta": 90,
+      "estado": "OK"
+    },
+    "Riesgo residual": {
+      "valor": 18,
+      "unidad": "%",
+      "meta": 20,
+      "estado": "OK"
+    },
+    "Incidentes críticos sin resolver": {
+      "valor": 1,
+      "unidad": "",
+      "meta": 0,
+      "estado": "ALERTA"
+    },
+    "Vulnerabilidades críticas abiertas": {
+      "valor": 3,
+      "unidad": "",
+      "meta": 0,
+      "estado": "ALERTA"
+    },
+    "Cobertura de controles ISO 27001": {
+      "valor": 78,
+      "unidad": "%",
+      "meta": 85,
+      "estado": "ALERTA"
+    }
+  },
+  "incidentes": [
+    {
+      "id": "IR-2026-0501",
+      "tipo": "Fuerza Bruta",
+      "severidad": "CRÍTICO",
+      "estado": "RESUELTO",
+      "mttr": 14
+    },
+    {
+      "id": "IR-2026-0502",
+      "tipo": "Exfiltración Datos",
+      "severidad": "CRÍTICO",
+      "estado": "ACTIVO",
+      "mttr": null
+    },
+    {
+      "id": "IR-2026-0503",
+      "tipo": "Port Scanning",
+      "severidad": "MEDIO",
+      "estado": "RESUELTO",
+      "mttr": 8
+    },
+    {
+      "id": "IR-2026-0504",
+      "tipo": "Ransomware Simulado",
+      "severidad": "CRÍTICO",
+      "estado": "RESUELTO",
+      "mttr": 22
+    },
+    {
+      "id": "IR-2026-0505",
+      "tipo": "Escalada Privilegios",
+      "severidad": "ALTO",
+      "estado": "RESUELTO",
+      "mttr": 18
+    }
+  ],
+  "resumen": {
+    "total_incidentes": 5,
+    "resueltos": 4,
+    "criticos": 3,
+    "mttr_promedio_min": 15.5,
+    "riesgo_residual_pct": 18
+  }
+}

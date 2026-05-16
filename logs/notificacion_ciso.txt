@@ -1,0 +1,1 @@
+ALERTA P1: Exfiltración detectada - IR-2026-0502
